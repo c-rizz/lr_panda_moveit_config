@@ -1,9 +1,13 @@
 <launch>
 
   <arg name="load_gripper" default="true" />
+  <arg name="load_camera" default="true" />
+  <arg name="robot_description_name" default="robot_description" />
 
   <include file="$(find simple_panda_moveit_config)/launch/planning_context.launch">
     <arg name="load_gripper" value="$(arg load_gripper)" />
+    <arg name="robot_description" value="$(arg robot_description_name)" />
+    <arg name="load_camera" default="$(arg load_camera)" />
   </include>
 
   <arg name="pipeline" default="ompl" />
