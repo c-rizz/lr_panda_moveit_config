@@ -1,7 +1,7 @@
 <launch>
 
   <arg name="load_gripper" default="true" />
-  <arg name="load_camera" default="true" />
+  <arg name="load_camera" default="false" />
   <arg name="robot_description_name" default="robot_description" />
 
   <include file="$(find simple_panda_moveit_config)/launch/planning_context.launch">
