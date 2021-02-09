@@ -4,6 +4,7 @@
 
   <!-- By default we do not overwrite the URDF. Change the following to true to change the default behavior -->
   <arg name="load_robot_description" default="false"/>
+  <arg name="load_robot_description_semantic" default="false"/>
 
   <!-- The name of the parameter under which the URDF is loaded -->
   <arg name="robot_description" default="robot_description"/>
@@ -13,11 +14,11 @@
   <param if="$(eval arg('load_robot_description') and not arg('load_gripper'))" name="$(arg robot_description)" command="$(find xacro)/xacro '$(find franka_description)/robots/panda_arm.urdf.xacro'"/>
 
   <!-- The semantic description that corresponds to the URDF -->
-  <param if="$(arg load_gripper)"
+  <param if="$(eval arg('load_robot_description_semantic') and arg('load_gripper'))"
     name="$(arg robot_description)_semantic" command="$(find xacro)/xacro '$(find simple_panda_moveit_config)/config/panda_arm_hand.srdf.xacro'"/>
-  <param if="$(arg load_camera)"
+  <param if="$(eval arg('load_robot_description_semantic') and arg('load_camera'))"
     name="$(arg robot_description)_semantic" command="$(find xacro)/xacro '$(find gazebo_gym)/models/panda_arm_d435i.srdf.xacro'"  />
-  <param if="$(eval arg('load_robot_description') and not (arg('load_gripper') or arg('load_camera')))"
+  <param if="$(eval arg('load_robot_description_semantic') and not (arg('load_gripper') or arg('load_camera')))"
     name="$(arg robot_description)_semantic" command="$(find xacro)/xacro '$(find simple_panda_moveit_config)/config/panda_arm.srdf.xacro'"   />
 
   <!-- Load updated joint limits (override information from URDF) -->
