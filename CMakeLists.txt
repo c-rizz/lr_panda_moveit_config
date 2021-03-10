@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(simple_panda_moveit_config)
+project(lr_panda_moveit_config)
 
 find_package(catkin REQUIRED)
 
