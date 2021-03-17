@@ -1,5 +1,7 @@
  controller_list:
-  - name: panda_arm_effort_trajectory_controller
+# It would actually be possible to list both position and effort, moveit will then use what it finds.
+# But enforcing a specific one with arg seems more safe to me.
+  - name: panda_arm_$(arg control_mode)_trajectory_controller
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
     default: true

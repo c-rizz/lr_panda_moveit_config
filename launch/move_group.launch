@@ -1,8 +1,11 @@
 <launch>
 
+  <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${walltime}] [${node}]: ${message}" />
+
   <arg name="load_gripper" default="true" />
   <arg name="robot_description_name" default="robot_description" />
   <arg name="load_robot_description_semantic" default="true"/>
+  <arg name="control_mode" default="position"/> <!-- In the real, effort is currently unsupported -->-->
 
   <include file="$(find lr_panda_moveit_config)/launch/planning_context.launch">
     <arg name="load_gripper" value="$(arg load_gripper)" />
@@ -41,6 +44,7 @@
     <arg name="moveit_controller_manager" value="panda" if="$(eval not arg('fake_execution') and not arg('load_gripper'))"/>
     <arg name="moveit_controller_manager" value="panda_gripper" if="$(eval not arg('fake_execution') and arg('load_gripper'))"/>
     <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
+    <arg name="control_mode" value="$(arg control_mode)"/>
   </include>
 
   <!-- Sensors Functionality -->
@@ -83,6 +87,9 @@
 
     <remap from="/joint_states" to="/joint_states_desired" />
     <remap from="position_joint_trajectory_controller/follow_joint_trajectory" to="crap" />
+
+    <remap from="robot_description" to="$(arg robot_description_name)"/>
+    <remap from="robot_description_semantic" to="$(arg robot_description_name)_semantic"/>
   </node>
 
 </launch>
