@@ -5,7 +5,7 @@
   <arg name="load_gripper" default="true" />
   <arg name="robot_description_name" default="robot_description" />
   <arg name="load_robot_description_semantic" default="true"/>
-  <arg name="control_mode" default="position"/> <!-- In the real, effort is currently unsupported -->-->
+  <arg name="control_mode" default="position"/> <!-- In the real, effort is currently unsupported -->
 
   <include file="$(find lr_panda_moveit_config)/launch/planning_context.launch">
     <arg name="load_gripper" value="$(arg load_gripper)" />
