@@ -4,6 +4,7 @@
   <!-- By default we do not overwrite the URDF. Change the following to true to change the default behavior -->
   <arg name="load_robot_description" default="false"/>
   <arg name="load_robot_description_semantic" default="false"/>
+  <arg name="load_joint_limits" default="true"/>
 
   <!-- The name of the parameter under which the URDF is loaded -->
   <arg name="robot_description" default="robot_description"/>
@@ -23,7 +24,7 @@
     name="$(arg robot_description)_semantic" command="$(find xacro)/xacro '$(find lr_panda_moveit_config)/config/panda_arm.srdf.xacro'"   />
 
   <!-- Load updated joint limits (override information from URDF) -->
-  <group ns="$(arg robot_description)_planning">
+  <group ns="$(arg robot_description)_planning" if="$(arg load_joint_limits)">
     <rosparam command="load" file="$(find lr_panda_moveit_config)/config/joint_limits.yaml"/>
   </group>
 

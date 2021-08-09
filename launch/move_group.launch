@@ -6,11 +6,13 @@
   <arg name="robot_description_name" default="robot_description" />
   <arg name="load_robot_description_semantic" default="true"/>
   <arg name="control_mode" default="position"/> <!-- In the real, effort is currently unsupported -->
+  <arg name="load_joint_limits" default="true"/>
 
   <include file="$(find lr_panda_moveit_config)/launch/planning_context.launch">
     <arg name="load_gripper" value="$(arg load_gripper)" />
     <arg name="robot_description" value="$(arg robot_description_name)" />
     <arg name="load_robot_description_semantic" value="$(arg load_robot_description_semantic)"/>
+    <arg name="load_joint_limits" value="$(arg load_joint_limits)"/>
   </include>
 
   <arg name="pipeline" default="ompl" />
